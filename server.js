@@ -29,10 +29,10 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     //serve form to user 
     app.get('/', (req, res)=>{
         //returns a promise, need to use then/catch to display result
-        const cursor = db.collection('quotes').find().toArray()
+        db.collection('quotes').find().toArray()
         .then(results =>{
             console.log(results);
-            res.render('index.ejs', { quotes : results})
+            res.render('index.ejs', { quotes : results })
         })
         .catch(err => {
             console.log(err);
@@ -54,7 +54,6 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
                     name: req.body.name,
                     quote: req.body.quote
                 }
-
             },
             {
                 upsert: true
